@@ -26,6 +26,7 @@
  * @apiVersion 1.0.0
  * @apiName PostRide
  * @apiGroup Ride
+ * @apiDescription Create a new ride. This endpoint return list of ride where ID is the created ride ID.
  *
  * @apiParam {Number{Between -90 and 90, inclusive}} start_lat Ride start latitude.
  * @apiParam {Number{Between -180 and 180, inclusive}} start_long Ride start longitude.
@@ -43,15 +44,17 @@
  * @apiVersion 1.0.0
  * @apiName ListRides
  * @apiGroup Ride
+ * @apiDescription List all rides. This endpoint return list of all rides.
  * 
  * @apiUse SuccessListOfRide
  */
 
 /**
- * @api {get} /rides/:id List rides by id
+ * @api {get} /rides/:id List rides by ride ID
  * @apiVersion 1.0.0
  * @apiName ListRidesById
  * @apiGroup Ride
+ * @apiDescription List rides by ride ID. This endpoint return list of ride where ID is the provided ride ID.
  *
  * @apiParam {Number} id Ride's unique ID.
  *
