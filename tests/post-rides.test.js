@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('supertest');
+const {expect} = require('chai');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
@@ -269,8 +270,11 @@ describe('POST /rides', () => {
                     ...validRideInput
                 })
                 .expect('Content-Type', /json/u)
-                .expect(200, [
-                    {
+                .expect(200)
+                .expect((res) => {
+                    expect(res.body.length).to.equal(1);
+                    expect(res.body[0]).to.have.property('created');
+                    expect(res.body[0]).to.include({
                         driverName: 'James Clear',
                         driverVehicle: 'Yamaha Lagenda',
                         endLat: 51.1234,
@@ -279,8 +283,9 @@ describe('POST /rides', () => {
                         riderName: 'Warren Buffett',
                         startLat: 80.9894,
                         startLong: 49.34343
-                    }
-                ], done);
+                    });
+                })
+                .end(done);
         });
     });
 });
