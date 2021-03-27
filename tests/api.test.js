@@ -23,10 +23,10 @@ describe('API tests', () => {
 
     describe('GET /health', () => {
         it('should return health', (done) => {
-            request(app).
-                get('/health').
-                expect('Content-Type', /text/u).
-                expect(200, done);
+            request(app)
+                .get('/health')
+                .expect('Content-Type', /text/u)
+                .expect(200, done);
         });
     });
 });
