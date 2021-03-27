@@ -104,5 +104,69 @@ describe('API tests', () => {
                     }, done);
             });
         });
+
+        describe('when end_lat more than 90 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        end_lat: 99
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
+        });
+
+        describe('when end_lat less than -90 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        end_lat: -99
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
+        });
+
+        describe('when end_long more than 180 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        end_long: 189
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
+        });
+
+        describe('when end_long less than -180 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        end_long: -189
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
+        });
     });
 });
