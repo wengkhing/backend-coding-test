@@ -1,6 +1,7 @@
 module.exports = {
     'env': {
         'es2021': true,
+        'mocha': true,
         'node': true
     },
     'extends': 'eslint:recommended',
@@ -54,7 +55,7 @@ module.exports = {
         'default-case': 'error',
         'default-case-last': 'error',
         'default-param-last': 'error',
-        'dot-location': 'error',
+        'dot-location': 'off',
         'dot-notation': 'error',
         'eol-last': 'off',
         'eqeqeq': 'error',

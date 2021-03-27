@@ -10,7 +10,7 @@ const buildSchemas = require('../src/schemas');
 
 describe('API tests', () => {
     before((done) => {
-        db.serialize((err) => { 
+        db.serialize((err) => {
             if (err) {
                 return done(err);
             }
@@ -25,7 +25,7 @@ describe('API tests', () => {
         it('should return health', (done) => {
             request(app)
                 .get('/health')
-                .expect('Content-Type', /text/)
+                .expect('Content-Type', /text/u)
                 .expect(200, done);
         });
     });

@@ -7,12 +7,12 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "nyc mocha tests",
+    "test": "npm run lint && nyc mocha tests",
     "start": "node index.js",
     "gen-doc": "./node_modules/.bin/apidoc -i src/ -o doc/",
     "open-doc": "node ./scripts/open.js",
     "doc": "npm run gen-doc && npm run open-doc",
-    "lint": "./node_modules/.bin/eslint \"src/**\""
+    "lint": "./node_modules/.bin/eslint \"src/**\" \"tests/**\" --fix"
   },
   "keywords": [
     "Xendit"
