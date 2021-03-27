@@ -168,5 +168,73 @@ describe('API tests', () => {
                     }, done);
             });
         });
+
+        describe('Rider name validation', () => {
+            describe('when is null', () => {
+                it('should return validation error', (done) => {
+                    request(app)
+                        .post('/rides')
+                        .send({
+                            ...validRideInput,
+                            rider_name: null
+                        })
+                        .expect('Content-Type', /json/u)
+                        .expect(200, {
+                            error_code: 'VALIDATION_ERROR',
+                            message: 'Rider name must be a non empty string'
+                        }, done);
+                });
+            });
+    
+            describe('when is an empty string', () => {
+                it('should return validation error', (done) => {
+                    request(app)
+                        .post('/rides')
+                        .send({
+                            ...validRideInput,
+                            rider_name: null
+                        })
+                        .expect('Content-Type', /json/u)
+                        .expect(200, {
+                            error_code: 'VALIDATION_ERROR',
+                            message: 'Rider name must be a non empty string'
+                        }, done);
+                });
+            });
+        });
+
+        describe('Driver name validation', () => {
+            describe('when is null', () => {
+                it('should return validation error', (done) => {
+                    request(app)
+                        .post('/rides')
+                        .send({
+                            ...validRideInput,
+                            driver_name: null
+                        })
+                        .expect('Content-Type', /json/u)
+                        .expect(200, {
+                            error_code: 'VALIDATION_ERROR',
+                            message: 'Driver name must be a non empty string'
+                        }, done);
+                });
+            });
+    
+            describe('when is an empty string', () => {
+                it('should return validation error', (done) => {
+                    request(app)
+                        .post('/rides')
+                        .send({
+                            ...validRideInput,
+                            driver_name: null
+                        })
+                        .expect('Content-Type', /json/u)
+                        .expect(200, {
+                            error_code: 'VALIDATION_ERROR',
+                            message: 'Driver name must be a non empty string'
+                        }, done);
+                });
+            });
+        });
     });
 });
