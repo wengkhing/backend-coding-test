@@ -8,6 +8,16 @@ const db = new sqlite3.Database(':memory:');
 const app = require('../src/app')(db);
 const buildSchemas = require('../src/schemas');
 
+const validRideInput = {
+    driver_name: 'James Clear',
+    driver_vehicle: 'Yamaha Lagenda',
+    end_lat: 51.1234,
+    end_long: 51.543453,
+    rider_name: 'Warren Buffett',
+    start_lat: 99,
+    start_long: 49.34343
+};
+
 describe('API tests', () => {
     before((done) => {
         db.serialize((err) => {
@@ -27,6 +37,72 @@ describe('API tests', () => {
                 .get('/health')
                 .expect('Content-Type', /text/u)
                 .expect(200, done);
+        });
+    });
+
+    describe('POST /rides', () => {
+        describe('when start_lat more than 90 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        start_lat: 99
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
+        });
+
+        describe('when start_lat less than -90 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        start_lat: -99
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
+        });
+
+        describe('when start_long more than 180 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        start_long: 189
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
+        });
+
+        describe('when start_long less than -180 degree', () => {
+            it('should return validation error', (done) => {
+                request(app)
+                    .post('/rides')
+                    .send({
+                        ...validRideInput,
+                        start_long: -189
+                    })
+                    .expect('Content-Type', /json/u)
+                    .expect(200, {
+                        error_code: 'VALIDATION_ERROR',
+                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                    }, done);
+            });
         });
     });
 });
