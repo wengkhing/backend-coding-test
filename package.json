@@ -11,7 +11,8 @@
     "start": "node index.js",
     "gen-doc": "./node_modules/.bin/apidoc -i src/ -o doc/",
     "open-doc": "node ./scripts/open.js",
-    "doc": "npm run gen-doc && npm run open-doc"
+    "doc": "npm run gen-doc && npm run open-doc",
+    "lint": "./node_modules/.bin/eslint \"src/**\""
   },
   "keywords": [
     "Xendit"
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "apidoc": "^0.27.1",
+    "eslint": "^7.23.0",
     "mocha": "^6.1.4",
     "open": "^8.0.4",
     "supertest": "^4.0.2"
