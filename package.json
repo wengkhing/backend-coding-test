@@ -9,7 +9,9 @@
   "scripts": {
     "test": "mocha tests",
     "start": "node index.js",
-    "doc": "./node_modules/.bin/apidoc -i src/ -o doc/ && node ./scripts/open.js"
+    "gen-doc": "./node_modules/.bin/apidoc -i src/ -o doc/",
+    "open-doc": "node ./scripts/open.js",
+    "doc": "npm run gen-doc && npm run open-doc"
   },
   "keywords": [
     "Xendit"
