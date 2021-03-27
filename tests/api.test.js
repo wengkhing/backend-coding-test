@@ -14,7 +14,7 @@ const validRideInput = {
     end_lat: 51.1234,
     end_long: 51.543453,
     rider_name: 'Warren Buffett',
-    start_lat: 99,
+    start_lat: 80.9894,
     start_long: 49.34343
 };
 
@@ -116,7 +116,7 @@ describe('API tests', () => {
                     .expect('Content-Type', /json/u)
                     .expect(200, {
                         error_code: 'VALIDATION_ERROR',
-                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                        message: 'End latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
                     }, done);
             });
         });
@@ -132,7 +132,7 @@ describe('API tests', () => {
                     .expect('Content-Type', /json/u)
                     .expect(200, {
                         error_code: 'VALIDATION_ERROR',
-                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                        message: 'End latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
                     }, done);
             });
         });
@@ -148,7 +148,7 @@ describe('API tests', () => {
                     .expect('Content-Type', /json/u)
                     .expect(200, {
                         error_code: 'VALIDATION_ERROR',
-                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                        message: 'End latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
                     }, done);
             });
         });
@@ -164,7 +164,7 @@ describe('API tests', () => {
                     .expect('Content-Type', /json/u)
                     .expect(200, {
                         error_code: 'VALIDATION_ERROR',
-                        message: 'Start latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
+                        message: 'End latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively'
                     }, done);
             });
         });
