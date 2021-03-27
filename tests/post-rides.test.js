@@ -239,7 +239,7 @@ describe('POST /rides', () => {
                     .expect('Content-Type', /json/u)
                     .expect(400, {
                         error_code: 'VALIDATION_ERROR',
-                        message: 'Driver name must be a non empty string'
+                        message: 'Driver vehicle must be a non empty string'
                     }, done);
             });
         });
@@ -262,7 +262,7 @@ describe('POST /rides', () => {
     });
 
     describe('when provide valid ride details', () => {
-        it('should return validation error', (done) => {
+        it('should return success', (done) => {
             request(app)
                 .post('/rides')
                 .send({
@@ -271,8 +271,14 @@ describe('POST /rides', () => {
                 .expect('Content-Type', /json/u)
                 .expect(200, [
                     {
-                        ...validRideInput,
-                        rideID: 1
+                        driverName: 'James Clear',
+                        driverVehicle: 'Yamaha Lagenda',
+                        endLat: 51.1234,
+                        endLong: 51.543453,
+                        rideID: 1,
+                        riderName: 'Warren Buffett',
+                        startLat: 80.9894,
+                        startLong: 49.34343
                     }
                 ], done);
         });
