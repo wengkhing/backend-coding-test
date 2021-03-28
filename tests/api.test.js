@@ -5,7 +5,7 @@ const { expect } = require('chai');
 
 const db = require('../src/db');
 
-const app = require('../src/app')(db);
+const app = require('../src/app')();
 const buildSchemas = require('../src/schemas');
 const seed = require('../src/seed');
 const clearTable = require('./clear-table');
