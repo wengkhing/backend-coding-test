@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "npm run lint && nyc mocha tests",
+    "test:load": "./node_modules/.bin/artillery run artillery.yml",
     "start": "node index.js",
     "gen-doc": "./node_modules/.bin/apidoc -i src/ -o doc/",
     "open-doc": "node ./scripts/open.js",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "apidoc": "^0.27.1",
+    "artillery": "^1.6.2",
     "chai": "^4.3.4",
     "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
