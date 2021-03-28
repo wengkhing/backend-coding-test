@@ -16,7 +16,11 @@ module.exports = async (db) => {
         )
     `;
 
-  await db.execute(createRideTableSchema);
+  try {
+    await db.execute(createRideTableSchema);
+  } catch (err) {
+    // ignore error
+  }
 
   return db;
 };
