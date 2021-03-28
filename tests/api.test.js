@@ -386,28 +386,4 @@ describe('API tests', () => {
             });
         });
     });
-
-    describe('GET /rides', () => {
-        it('should return health', (done) => {
-            request(app)
-                .get('/rides')
-                .expect('Content-Type', /json/u)
-                .expect(400, {
-                    error_code: 'RIDES_NOT_FOUND_ERROR',
-                    message: 'Could not find any rides'
-                }, done);
-        });
-    });
-
-    describe('GET /rides/:id', () => {
-        it('should return health', (done) => {
-            request(app)
-                .get('/rides/123')
-                .expect('Content-Type', /json/u)
-                .expect(400, {
-                    error_code: 'RIDES_NOT_FOUND_ERROR',
-                    message: 'Could not find any rides'
-                }, done);
-        });
-    });
 });
