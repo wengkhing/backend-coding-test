@@ -4,9 +4,10 @@ config:
     p95: 50
   phases:
     - duration: 30
-      arrivalRate: 30
+      arrivalRate: 100
 scenarios:
-  - flow:
+  - name: Rides Service
+    flow:
     - post:
         url: "/rides"
         json:

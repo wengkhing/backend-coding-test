@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "npm run lint && nyc mocha tests",
-    "test:load": "./node_modules/.bin/artillery run artillery.yml",
+    "test:load": "./node_modules/.bin/forever start index.js && ./node_modules/.bin/artillery run artillery.yml && node_modules/.bin/forever stopall",
     "start": "node index.js",
     "gen-doc": "./node_modules/.bin/apidoc -i src/ -o doc/",
     "open-doc": "node ./scripts/open.js",
@@ -34,6 +34,7 @@
     "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "forever": "^3.0.4",
     "mocha": "^6.1.4",
     "nyc": "^15.1.0",
     "open": "^8.0.4",
