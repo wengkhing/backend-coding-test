@@ -2,7 +2,8 @@ const db = require('../db');
 
 module.exports = async (req, res) => {
   try {
-    const { rows } = await db.query(`SELECT * FROM Rides WHERE rideID='${req.params.id}'`);
+    const params = [req.params.id];
+    const { rows } = await db.query('SELECT * FROM Rides WHERE rideID = ?', params);
 
     if (rows.length === 0) {
       return res.status(404).send({

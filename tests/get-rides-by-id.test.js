@@ -62,4 +62,45 @@ describe('GET /rides/:id', () => {
         .end(done);
     });
   });
+
+  describe('when attempt sql injection', () => {
+    before(() => {
+      db.serialize(() => {
+        seed(db);
+      });
+    });
+
+    after(async () => {
+      await clearTable(db);
+    });
+
+    it('should not affect the database', async () => {
+      await request(app)
+        .get('/rides/2;%20DROP%20TABLE%20Rides;%20--')
+        .expect('Content-Type', /json/u)
+        .expect(404, {
+          error_code: 'RIDES_NOT_FOUND_ERROR',
+          message: 'Could not find any rides'
+        });
+
+      await request(app)
+        .get('/rides/2')
+        .expect('Content-Type', /json/u)
+        .expect(200)
+        .expect((res) => {
+          expect(res.body.length).to.equal(1);
+          expect(res.body[0]).to.have.property('created');
+          expect(res.body[0]).to.include({
+            driverName: 'Andrew Garfield',
+            driverVehicle: 'Toyota Vios',
+            endLat: 56.333,
+            endLong: 78.333,
+            rideID: 2,
+            riderName: 'Sunder Pichai',
+            startLat: 12.333,
+            startLong: 34.333
+          });
+        });
+    });
+  });
 });
