@@ -28,13 +28,13 @@
  * @apiGroup Ride
  * @apiDescription Create a new ride. This endpoint return list of ride where ID is the created ride ID.
  *
- * @apiParam {Number{Between -90 and 90, inclusive}} start_lat Ride start latitude.
- * @apiParam {Number{Between -180 and 180, inclusive}} start_long Ride start longitude.
- * @apiParam {Number{Between -90 and 90, inclusive}} end_lat Ride end latitude.
- * @apiParam {Number{Between -180 and 180, inclusive}} end_long Ride end longitude.
- * @apiParam {String} rider_name Rider's name.
- * @apiParam {String} driver_name Driver's name.
- * @apiParam {String} driver_vehicle Driver's vehicle.
+ * @apiParam (Request body) {Number{Between -90 and 90, inclusive}} start_lat Ride start latitude.
+ * @apiParam (Request body) {Number{Between -180 and 180, inclusive}} start_long Ride start longitude.
+ * @apiParam (Request body) {Number{Between -90 and 90, inclusive}} end_lat Ride end latitude.
+ * @apiParam (Request body) {Number{Between -180 and 180, inclusive}} end_long Ride end longitude.
+ * @apiParam (Request body) {String} rider_name Rider's name.
+ * @apiParam (Request body) {String} driver_name Driver's name.
+ * @apiParam (Request body) {String} driver_vehicle Driver's vehicle.
  * 
  * @apiUse SuccessListOfRide
  */
@@ -46,6 +46,9 @@
  * @apiGroup Ride
  * @apiDescription List all rides. This endpoint return list of all rides.
  * 
+ * @apiParam (Query string) {Number} lastKey Indicates where to begin listing. This is convenient for pagination: To get the next page of results use the last key of the current page.
+ * @apiParam (Query string) {Number} limit Indicates total rides to return.
+ * 
  * @apiUse SuccessListOfRide
  */
 
@@ -56,7 +59,7 @@
  * @apiGroup Ride
  * @apiDescription List rides by ride ID. This endpoint return list of ride where ID is the provided ride ID.
  *
- * @apiParam {Number} id Ride's unique ID.
+ * @apiParam (Path parameter) {Number} id Ride's unique ID.
  *
  * @apiUse SuccessListOfRide
  */
