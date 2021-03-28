@@ -23,21 +23,10 @@ const rides = [
   [12.333, 34.333, 56.333, 78.333, 'Jone Turnus', 'Porunn Felinus', 'Yamaha Lagenda']
 ];
 
-module.exports = (db, done) => {
+module.exports = (db) => {
   const createRideTableSchema = 'INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
-  let count = 0;
-
-  const insert = () => {
-    db.run(createRideTableSchema, rides[count], () => {
-      count += 1;
-      if (count < rides.length) {
-        insert();
-      } else {
-        done();
-      }
-    });
-  };
-
-  insert();
+  rides.forEach(async (ride) => {
+    await db.asyncRun(createRideTableSchema, ride);
+  });
 };

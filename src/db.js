@@ -10,7 +10,7 @@ db.query = function (sql, params) {
       if (error) {
         reject(error);
       } else {
-        resolve(rows);
+        resolve({ rows, statement: this });
       }
     });
   });
@@ -24,7 +24,7 @@ db.asyncRun = function (sql, params) {
       if (error) {
         reject(error);
       } else {
-        resolve(rows);
+        resolve({ rows, statement: this });
       }
     });
   });

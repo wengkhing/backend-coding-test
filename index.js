@@ -14,8 +14,7 @@ const logger = require('./src/logger.js');
 
 db.serialize(async () => {
   await buildSchemas(db);
-  seed(db, () => {
-    const app = appConfig(db);
-    app.listen(port, () => logger.info(`App started and listening on port ${port}`));
-  });
+  seed(db);
+  const app = appConfig(db);
+  app.listen(port, () => logger.info(`App started and listening on port ${port}`));
 });

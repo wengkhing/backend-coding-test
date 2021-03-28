@@ -58,8 +58,8 @@ module.exports = (db) => {
     var values = [req.body.start_lat, req.body.start_long, req.body.end_lat, req.body.end_long, req.body.rider_name, req.body.driver_name, req.body.driver_vehicle];
 
     try {
-      await db.asyncRun('INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)', values);
-      const rows = await db.query('SELECT * FROM Rides WHERE rideID = ?', this.lastID);
+      const { statement } = await db.asyncRun('INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)', values);
+      const { rows } = await db.query('SELECT * FROM Rides WHERE rideID = ?', statement.lastID);
       res.send(rows);
     } catch (err) {
       return res.status(500).send({
@@ -74,7 +74,7 @@ module.exports = (db) => {
     const params = [lastKey, limit];
 
     try {
-      const rows = await db.query('SELECT * FROM Rides WHERE rideID > ? ORDER BY rideID LIMIT ?', params);
+      const { rows } = await db.query('SELECT * FROM Rides WHERE rideID > ? ORDER BY rideID LIMIT ?', params);
       if (rows.length === 0) {
         return res.status(404).send({
           error_code: 'RIDES_NOT_FOUND_ERROR',
@@ -93,7 +93,7 @@ module.exports = (db) => {
 
   app.get('/rides/:id', async (req, res) => {
     try {
-      const rows = await db.query(`SELECT * FROM Rides WHERE rideID='${req.params.id}'`);
+      const { rows } = await db.query(`SELECT * FROM Rides WHERE rideID='${req.params.id}'`);
 
       if (rows.length === 0) {
         return res.status(404).send({

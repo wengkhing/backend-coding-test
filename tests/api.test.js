@@ -21,16 +21,8 @@ const validRideInput = {
 };
 
 describe('API tests', () => {
-  before((done) => {
-    db.serialize((err) => {
-      if (err) {
-        return done(err);
-      }
-
-      buildSchemas(db);
-
-      done();
-    });
+  before(async () => {
+    await buildSchemas(db);
   });
 
   describe('GET /health', () => {
@@ -56,14 +48,14 @@ describe('API tests', () => {
     });
     
     describe('when ride exist', () => {
-      before((done) => {
+      before(() => {
         db.serialize(() => {
-          seed(db, done);
+          seed(db);
         });
       });
 
-      after((done) => {
-        clearTable(db, done);
+      after(async () => {
+        await clearTable(db);
       });
     
       it('should return success', (done) => {
@@ -105,14 +97,14 @@ describe('API tests', () => {
     
     describe('when database is not empty', () => {
       describe('and no query specified', () => {
-        before((done) => {
+        before(() => {
           db.serialize(() => {
-            seed(db, done);
+            seed(db);
           });
         });
   
-        after((done) => {
-          clearTable(db, done);
+        after(async () => {
+          await clearTable(db);
         });
   
         it('by default, should return first 10 items', (done) => {
@@ -130,14 +122,14 @@ describe('API tests', () => {
       });
 
       describe('query specified, lastKey is 5 and limit is 3', () => {
-        before((done) => {
+        before(() => {
           db.serialize(() => {
-            seed(db, done);
+            seed(db);
           });
         });
   
-        after((done) => {
-          clearTable(db, done);
+        after(async () => {
+          await clearTable(db);
         });
   
         it('should return 3 records starting from 6', (done) => {
@@ -156,14 +148,14 @@ describe('API tests', () => {
       });
 
       describe('query specified, lastKey is 12 and limit is 7', () => {
-        before((done) => {
+        before(() => {
           db.serialize(() => {
-            seed(db, done);
+            seed(db);
           });
         });
   
-        after((done) => {
-          clearTable(db, done);
+        after(async () => {
+          await clearTable(db);
         });
   
         it('should return 7 records starting from 13', (done) => {
