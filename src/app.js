@@ -86,11 +86,7 @@ module.exports = (db) => {
             }
 
             if (rows.length === 0) {
-<<<<<<< HEAD
-                return res.status(400).send({
-=======
                 return res.status(404).send({
->>>>>>> 4e1bbada946411324e0e34673e5d378c2142b04e
                     error_code: 'RIDES_NOT_FOUND_ERROR',
                     message: 'Could not find any rides'
                 });
@@ -110,11 +106,7 @@ module.exports = (db) => {
             }
 
             if (rows.length === 0) {
-<<<<<<< HEAD
-                return res.status(400).send({
-=======
                 return res.status(404).send({
->>>>>>> 4e1bbada946411324e0e34673e5d378c2142b04e
                     error_code: 'RIDES_NOT_FOUND_ERROR',
                     message: 'Could not find any rides'
                 });
