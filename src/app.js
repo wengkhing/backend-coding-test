@@ -79,7 +79,10 @@ module.exports = (db) => {
   });
 
   app.get('/rides', (req, res) => {
-    db.all('SELECT * FROM Rides', function (err, rows) {
+    const { lastKey = 0, limit = 10 } = req.query;
+    const params = [lastKey, limit];
+
+    db.all('SELECT * FROM Rides WHERE rideID > ? ORDER BY rideID LIMIT ?', params, function (err, rows) {
       if (err) {
         return res.status(500).send({
           error_code: 'SERVER_ERROR',

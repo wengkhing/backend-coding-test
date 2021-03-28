@@ -106,26 +106,83 @@ describe('API tests', () => {
     });
     
     describe('when database is not empty', () => {
-      before((done) => {
-        db.serialize(() => {
-          seed(db, done);
+      describe('and no query specified', () => {
+        before((done) => {
+          db.serialize(() => {
+            seed(db, done);
+          });
+        });
+  
+        after((done) => {
+          clearTable(db, done);
+        });
+  
+        it('by default, should return first 10 items', (done) => {
+          request(app)
+            .get('/rides')
+            .expect('Content-Type', /json/u)
+            .expect(200)
+            .expect((res) => {
+              expect(res.body.length).to.equal(10);
+              expect(res.body[0]).to.include({ rideID: 1 });
+              expect(res.body[res.body.length - 1]).to.include({ rideID: 10 });
+            })
+            .end(done);
         });
       });
 
-      after((done) => {
-        clearTable(db, done);
+      describe('query specified, lastKey is 5 and limit is 3', () => {
+        before((done) => {
+          db.serialize(() => {
+            seed(db, done);
+          });
+        });
+  
+        after((done) => {
+          clearTable(db, done);
+        });
+  
+        it('should return 3 records starting from 6', (done) => {
+          request(app)
+            .get('/rides')
+            .query({ lastKey: 5, limit: 3 })
+            .expect('Content-Type', /json/u)
+            .expect(200)
+            .expect((res) => {
+              expect(res.body.length).to.equal(3);
+              expect(res.body[0]).to.include({ rideID: 6 });
+              expect(res.body[res.body.length - 1]).to.include({ rideID: 8 });
+            })
+            .end(done);
+        });
       });
 
-      it('should return success', (done) => {
-        request(app)
-          .get('/rides')
-          .expect('Content-Type', /json/u)
-          .expect(200)
-          .expect((res) => {
-            expect(res.body.length).to.equal(2);
-          })
-          .end(done);
+      describe('query specified, lastKey is 12 and limit is 7', () => {
+        before((done) => {
+          db.serialize(() => {
+            seed(db, done);
+          });
+        });
+  
+        after((done) => {
+          clearTable(db, done);
+        });
+  
+        it('should return 7 records starting from 13', (done) => {
+          request(app)
+            .get('/rides')
+            .query({ lastKey: 12, limit: 7 })
+            .expect('Content-Type', /json/u)
+            .expect(200)
+            .expect((res) => {
+              expect(res.body.length).to.equal(7);
+              expect(res.body[0]).to.include({ rideID: 13 });
+              expect(res.body[res.body.length - 1]).to.include({ rideID: 19 });
+            })
+            .end(done);
+        });
       });
+      
     });
   });
 
