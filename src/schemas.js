@@ -16,7 +16,7 @@ module.exports = async (db) => {
         )
     `;
 
-  await db.asyncRun(createRideTableSchema);
+  await db.execute(createRideTableSchema);
 
   return db;
 };

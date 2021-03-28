@@ -16,7 +16,7 @@ db.query = function (sql, params) {
   });
 };
 
-db.asyncRun = function (sql, params) {
+db.execute = function (sql, params) {
   const dbInstance = this;
 
   return new Promise(function (resolve, reject) {

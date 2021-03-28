@@ -27,6 +27,6 @@ module.exports = (db) => {
   const createRideTableSchema = 'INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
   rides.forEach(async (ride) => {
-    await db.asyncRun(createRideTableSchema, ride);
+    await db.execute(createRideTableSchema, ride);
   });
 };
