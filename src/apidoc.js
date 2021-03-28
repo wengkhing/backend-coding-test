@@ -46,8 +46,8 @@
  * @apiGroup Ride
  * @apiDescription List all rides. This endpoint return list of all rides.
  * 
- * @apiParam (Query string) {Number} lastKey Indicates where to begin listing. This is convenient for pagination: To get the next page of results use the last key of the current page.
- * @apiParam (Query string) {Number} limit Indicates total rides to return.
+ * @apiParam (Query string) {Number} [lastKey=0] Indicates where to begin listing. This is convenient for pagination: To get the next page of results use the last key of the current page.
+ * @apiParam (Query string) {Number} [limit=10] Indicates total rides to return.
  * 
  * @apiUse SuccessListOfRide
  */
