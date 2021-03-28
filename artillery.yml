@@ -1,0 +1,33 @@
+config:
+  target: http://localhost:8010
+  ensure:
+    p95: 50
+  phases:
+    - duration: 30
+      arrivalRate: 30
+scenarios:
+  - flow:
+    - post:
+        url: "/rides"
+        json:
+          start_lat: 12.111
+          start_long: 34.111
+          end_lat: 56.222
+          end_long: 78.222
+          rider_name: "Mary Jane"
+          driver_name: "Peter Parker"
+          driver_vehicle: "Honda Jazz"
+    - get:
+        url: "/rides"
+        qs:
+          lastKey: 10
+          limit: 10
+    - loop:
+      - get:
+          url: "/rides/{{ $loopElement }}"
+      over:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
