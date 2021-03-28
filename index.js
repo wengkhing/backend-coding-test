@@ -10,10 +10,11 @@ const buildSchemas = require('./src/schemas');
 
 const appConfig = require('./src/app');
 
+const logger = require('./src/logger.js');
+
 db.serialize(() => {
   buildSchemas(db);
 
   const app = appConfig(db);
-  // eslint-disable-next-line no-console
-  app.listen(port, () => console.log(`App started and listening on port ${port}`));
+  app.listen(port, () => logger.info(`App started and listening on port ${port}`));
 });

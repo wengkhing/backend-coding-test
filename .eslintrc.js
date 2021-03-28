@@ -166,7 +166,7 @@ module.exports = {
     'no-shadow': 'off',
     'no-tabs': 'error',
     'no-template-curly-in-string': 'error',
-    'no-ternary': 'error',
+    'no-ternary': 'off',
     'no-throw-literal': 'error',
     'no-trailing-spaces': [
       'error',
