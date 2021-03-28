@@ -37,6 +37,8 @@
  * @apiParam (Request body) {String} driver_vehicle Driver's vehicle.
  * 
  * @apiUse SuccessListOfRide
+ * @apiError (Error 400) VALIDATION_ERROR (Start | End) latitude and longitude must be between -90 - 90 and -180 to 180 degrees respectively. (Rider name | Driver name | Driver vehicle) must be a non empty string
+ * @apiError (Error 500) SERVER_ERROR Unknown error
  */
 
 /**
@@ -50,6 +52,9 @@
  * @apiParam (Query string) {Number} [limit=10] Indicates total rides to return.
  * 
  * @apiUse SuccessListOfRide
+ * 
+ * @apiError (Error 404) RIDES_NOT_FOUND_ERROR There are no rides in the database
+ * @apiError (Error 500) SERVER_ERROR Unknown error
  */
 
 /**
@@ -62,4 +67,7 @@
  * @apiParam (Path parameter) {Number} id Ride's unique ID.
  *
  * @apiUse SuccessListOfRide
+ * 
+ * @apiError (Error 404) RIDES_NOT_FOUND_ERROR The <code>id</code> of the ride was not found.
+ * @apiError (Error 500) SERVER_ERROR Unknown error
  */
