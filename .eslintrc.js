@@ -53,7 +53,7 @@ module.exports = {
     'complexity': 'off',
     'computed-property-spacing': 'error',
     'consistent-return': 'off',
-    'consistent-this': 'error',
+    'consistent-this': 'off',
     'curly': 'error',
     'default-case': 'error',
     'default-case-last': 'error',
